@@ -1,0 +1,13 @@
+{
+    "apps":
+    [
+        {
+            "appId": "abcd0000",
+            "root": "MonoRepoTestAppA"
+        },
+        {
+            "appId": "abcd0001",
+            "root": "MonoRepoTestAppB"
+        }
+    ]
+}
