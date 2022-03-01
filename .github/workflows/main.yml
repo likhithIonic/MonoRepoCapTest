@@ -46,7 +46,7 @@ jobs:
         uses: ionic-team/appflow-build@v1
         with:
           token: ${{ secrets.SECRET }}
-          app-id: abcd0000 # Replace with app id for MonoRepoTestAppA
+          app-id: db4d1838
           platform: Web
           artifact-retention-days: 1
 
