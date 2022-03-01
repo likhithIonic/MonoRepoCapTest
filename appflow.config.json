@@ -4,10 +4,6 @@
         {
             "appId": "db4d1838",
             "root": "MonoRepoTestAppA"
-        },
-        {
-            "appId": "abcd0001",
-            "root": "MonoRepoTestAppB"
         }
     ]
 }
