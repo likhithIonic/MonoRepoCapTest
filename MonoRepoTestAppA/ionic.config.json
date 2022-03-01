@@ -1,0 +1,7 @@
+{
+  "name": "MonoRepoTestAppA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
