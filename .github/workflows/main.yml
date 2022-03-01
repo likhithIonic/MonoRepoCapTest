@@ -1,0 +1,105 @@
+name: Monorepo Cap Test 
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  
+  schedule:
+    - cron:  '1 22 * * *'    
+
+
+
+jobs:
+  # This will build an IPA & Upload the artifact in iOS.zip
+
+  # Jobs to build for MonoRepoTestAppA
+  build-ios-test-a:
+    runs-on: ubuntu-latest
+    steps:
+      - name: MonoRepoTestAppA iOS Build Test
+        uses: ionic-team/appflow-build@v1
+        with:
+          token: ${{ secrets.SECRET }}
+          app-id: abcd0000 # Replace with app id for MonoRepoTestAppA
+          platform: iOS
+          build-type: development
+          certificate: ios_dev
+          native-config: ios_dev
+          upload-artifact: ios
+          artifact-retention-days: 1
+
+      - name: Report Status
+        if: always()
+        uses: likhith99/notify-slack-action@master
+        with:
+          status: ${{ job.status }}
+          notify_when: 'failure'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+          
+    # 
+  build-web-test-a:
+    runs-on: ubuntu-latest
+    steps:
+      - name: MonoRepoTestAppA Web Build Test
+        uses: ionic-team/appflow-build@v1
+        with:
+          token: ${{ secrets.SECRET }}
+          app-id: abcd0000 # Replace with app id for MonoRepoTestAppA
+          platform: Web
+          artifact-retention-days: 1
+
+      - name: Report Status
+        if: always()
+        uses: likhith99/notify-slack-action@master
+        with:
+          status: ${{ job.status }}
+          notify_when: 'failure'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+  
+  # Jobs to build for MonoRepoTestAppB
+  build-ios-test-b:
+    runs-on: ubuntu-latest
+    steps:
+      - name: MonoRepoTestAppB iOS Build Test
+        uses: ionic-team/appflow-build@v1
+        with:
+          token: ${{ secrets.SECRET }}
+          app-id: abcd0001 # Replace with app id for MonoRepoTestAppB
+          platform: iOS
+          build-type: development
+          certificate: ios_dev
+          native-config: ios_dev
+          upload-artifact: ios
+          artifact-retention-days: 1
+
+      - name: Report Status
+        if: always()
+        uses: likhith99/notify-slack-action@master
+        with:
+          status: ${{ job.status }}
+          notify_when: 'failure'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+
+  build-web-test-b:
+    runs-on: ubuntu-latest
+    steps:
+      - name: MonoRepoTestAppB Web Build Test
+        uses: ionic-team/appflow-build@v1
+        with:
+          token: ${{ secrets.SECRET }}
+          app-id: abcd0001 # Replace with app id for MonoRepoTestAppB
+          platform: Web
+          artifact-retention-days: 1
+
+      - name: Report Status
+        if: always()
+        uses: likhith99/notify-slack-action@master
+        with:
+          status: ${{ job.status }}
+          notify_when: 'failure'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
