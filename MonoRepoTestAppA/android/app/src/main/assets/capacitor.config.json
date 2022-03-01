@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "MonoRepoTestAppA",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
